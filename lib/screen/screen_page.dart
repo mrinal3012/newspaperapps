@@ -14,7 +14,7 @@ class ScreenPage extends StatefulWidget {
 class _ScreenPageState extends State<ScreenPage> {
 
 
-  int _currentIndex = 1;
+  int _currentIndex = 0;
   List<Widget> pages=[
     HomePage(),
     CityPage(),

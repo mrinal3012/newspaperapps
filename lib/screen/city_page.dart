@@ -9,81 +9,113 @@ class CityPage extends StatefulWidget {
 }
 
 class _CityPageState extends State<CityPage> {
+  TextEditingController _cityController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.purple,
-      appBar: AppBar(
+        resizeToAvoidBottomInset: false,
         backgroundColor: Colors.white,
-        title: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Icon(Icons.menu,color: Colors.black,),
-            Text("Bangladesh Times",style: TextStyle(color: Colors.black),),
-            Icon(Icons.search_rounded,color: Colors.black)
-          ],),
-      ),
-
-      body: Column(children: [
-        Expanded( flex: 1,
-        child: ListView(
-          scrollDirection: Axis.horizontal,
-          children: [
-            Text("hello"),
-            SizedBox(width: 40,),
-            Text("hello"),
-            SizedBox(width: 40,),
-            Text("hello"),
-            SizedBox(width: 40,),
-            Text("hello"),
-            SizedBox(width: 40,),
-            Text("hello"),
-            SizedBox(width: 40,),
-            Text("hello"),
-            SizedBox(width: 40,),
-            Text("hello"),
-            SizedBox(width: 40,),
-            Text("hello"),
-            SizedBox(width: 40,), Text("hello"),
-            SizedBox(width: 40,),
-            Text("hello"),
-            SizedBox(width: 40,),
-            Text("hello"),
-            SizedBox(width: 40,),
-            Text("hello"),
-            SizedBox(width: 40,),
-            Text("hello"),
-            SizedBox(width: 40,),
-            Text("hello"),
-            SizedBox(width: 40,),
-            Text("hello"),
-            SizedBox(width: 40,),
-            Text("hello"),
-            SizedBox(width: 40,),
-          ],),
-        ),
-        Expanded(
-            flex: 15,
-            child: Container(
-
-              height: double.infinity,
-              width: double.infinity,
-              color: Colors.blueGrey,
-            child: ListView.builder(
-              itemCount: 10,
-              itemBuilder: (context, index) =>
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Container(height: 100,color: Colors.white,
+        body: Padding(
+          padding: const EdgeInsets.only(top: 40, left: 10, right: 10),
+          child: Column(
+            children: [
+              Expanded(
+                  flex: 10,
+                  child: Padding(
+                    padding: const EdgeInsets.only(bottom: 8),
+                    child: TextField(
+                      controller: _cityController,
+                      decoration: InputDecoration(
+                          hintText: "Search City",
+                          border: OutlineInputBorder(
+                              borderSide: BorderSide(width: 20),
+                              borderRadius: BorderRadius.circular(10)),
+                          suffixIcon: Icon(Icons.search)),
+                    ),
+                  )),
+              SizedBox(
+                height: 5,
+              ),
+              Expanded(
+                  flex: 1,
+                  child: Container(
+                    color: Colors.blueGrey,
+                  )),
+              SizedBox(
+                height: 5,
+              ),
+              Expanded(
+                  flex: 40,
                   child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-
+                      Expanded(
+                        flex: 3,
+                        child: Text(
+                          "POPULAR CITYS",
+                          style: TextStyle(
+                              fontSize: 15,
+                              fontWeight: FontWeight.w900,
+                              color: Colors.red),
+                        ),
+                      ),
+                      Expanded(
+                          flex: 32,
+                          child: GridView.builder(
+                              gridDelegate:
+                                  SliverGridDelegateWithFixedCrossAxisCount(
+                                      crossAxisCount: 4,
+                                      mainAxisSpacing: 5,
+                                      childAspectRatio: 1,
+                                      crossAxisSpacing: 5),
+                              itemCount: 8,
+                              itemBuilder: (context, index) => Column(
+                                    children: [
+                                      CircleAvatar(
+                                        backgroundImage: AssetImage(
+                                            "${citylist[index].img}"),
+                                      ),
+                                      Text(
+                                        "${citylist[index].name}",
+                                        style: TextStyle(
+                                            fontSize: 12,
+                                            color: Colors.black,
+                                            fontWeight: FontWeight.w600),
+                                      )
+                                    ],
+                                  )))
                     ],
-                  ),
-                  ),
-                ),),
-            ))
-      ],),
-    );
+                  )),
+              Expanded(
+                  flex: 1,
+                  child: Container(
+                    color: Colors.blueGrey,
+                  )),
+              SizedBox(height: 10,),
+              Expanded(
+                flex: 60,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Expanded(flex: 3, child: Text("ALL CITIES",style: TextStyle(color: Colors.red,fontWeight: FontWeight.w800),)),
+                    Expanded(
+                      flex: 50,
+                      child: ListView.builder(
+                        itemCount: 10,
+                        itemBuilder: (context, index) => Container(
+                          padding: EdgeInsets.only(left: 10),
+                          height: 40,child: Text("${cityname[index]}",style: TextStyle(color: Colors.black,fontWeight: FontWeight.w600)) ,),)
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
+        ));
   }
+
+  List<String> cityname=[
+    "bagerhat","chuadanga","jashore","jhenaidah","khulna","kushtia","magura","meherpur","narail","satkhira",
+  ];
 }
