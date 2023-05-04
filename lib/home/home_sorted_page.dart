@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:newspaperapps/model/model_class_page.dart';
+import 'package:newspaperapps/porvider/news_provider.dart';
+import 'package:provider/provider.dart';
 
 class HomeSortedPage extends StatefulWidget {
   const HomeSortedPage({Key? key}) : super(key: key);
@@ -10,6 +13,9 @@ class HomeSortedPage extends StatefulWidget {
 class _HomeSortedPageState extends State<HomeSortedPage> {
   @override
   Widget build(BuildContext context) {
+
+    var newsProvider=Provider.of<NewsProvider>(context);
+
     return Scaffold(
       body: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,

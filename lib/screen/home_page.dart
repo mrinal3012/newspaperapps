@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:newspaperapps/home/home_news_header.dart';
+import 'package:newspaperapps/home/home_news_list_page.dart';
 import 'package:newspaperapps/home/home_sorted_page.dart';
 import 'package:newspaperapps/model/model_class_page.dart';
 import 'package:newspaperapps/screen/bangladesh_times_page.dart';
@@ -42,7 +43,7 @@ class _HomePageState extends State<HomePage> {
           children: [
             Expanded(flex: 1, child: HomeNewsHeader()),
             Expanded(flex: 1, child:HomeSortedPage()),
-            Expanded(flex: 11, child: Container())
+            Expanded(flex: 11, child: HomeNewsListPage())
           ],
         ),
       ),
