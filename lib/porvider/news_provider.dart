@@ -5,9 +5,22 @@ import 'package:flutter/material.dart';
 
 class NewsProvider extends ChangeNotifier {
   NewsModel? newsModel;
+  int pageNo = 1;
 
   Future<NewsModel> GetHomeData() async {
-    newsModel = await CustomHttpRequest.fatchHomeData();
+    newsModel = await CustomHttpRequest.fatchHomeData(pageNo);
     return newsModel!;
+  }
+  void increment(){
+    pageNo++;
+    notifyListeners();
+  }
+  void decrement(){
+    if(pageNo<=1){
+      return null;
+    }else{
+      pageNo--;
+    }
+    notifyListeners();
   }
 }

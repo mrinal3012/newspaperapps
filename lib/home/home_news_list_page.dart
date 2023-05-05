@@ -21,6 +21,7 @@ class _HomeNewsListPageState extends State<HomeNewsListPage> {
   @override
   Widget build(BuildContext context) {
     var newsProvider=Provider.of<NewsProvider>(context);
+    // var pageNo = newsProvider.pageNo;
     return Scaffold(
       body: FutureBuilder<NewsModel>(
         future: newsProvider.GetHomeData(),
@@ -45,10 +46,7 @@ class _HomeNewsListPageState extends State<HomeNewsListPage> {
                   padding: const EdgeInsets.symmetric(vertical: 15,horizontal: 3),
                   child:ClipRRect(
                     borderRadius: BorderRadius.circular(12),
-                    child:
-                      // Image.network("${snapshot.data!.articles![index].urlToImage}",
-                      // width: double.infinity,height: double.infinity,fit: BoxFit.cover,),
-                    CachedNetworkImage(
+                    child: CachedNetworkImage(
                       imageUrl: "${snapshot.data!.articles![index].urlToImage}",
                       placeholder: (context, url) => Center(child: CircularProgressIndicator()),
                       errorWidget: (context, url, error) =>Image.asset("images/noimage.jpg"),

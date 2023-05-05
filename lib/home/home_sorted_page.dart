@@ -11,6 +11,7 @@ class HomeSortedPage extends StatefulWidget {
 }
 
 class _HomeSortedPageState extends State<HomeSortedPage> {
+
   @override
   Widget build(BuildContext context) {
 
@@ -23,8 +24,25 @@ class _HomeSortedPageState extends State<HomeSortedPage> {
           Expanded(flex: 4, child:Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
-              ElevatedButton(style: ButtonStyle(backgroundColor: MaterialStatePropertyAll(Colors.white)), onPressed: () {}, child: Text("Prev",style: TextStyle(fontSize: 25,fontWeight: FontWeight.w700,color: Colors.blueGrey)),),
-              ElevatedButton(style: ButtonStyle(backgroundColor: MaterialStatePropertyAll(Colors.white)), onPressed: () {}, child: Text("Next",style: TextStyle(fontSize: 25,fontWeight: FontWeight.w700,color: Colors.blueGrey)),)],),),
+              ElevatedButton(style: ButtonStyle(backgroundColor: MaterialStatePropertyAll(Colors.white)), onPressed: () {
+                // if(pageNo>1){
+                //   return null;
+                // }else{
+                //   pageNo-=1;
+                // }
+                setState(() {
+                  newsProvider.decrement();
+                });
+
+              }, child: Text("Prev",style: TextStyle(fontSize: 25,fontWeight: FontWeight.w700,color: Colors.blueGrey)),),
+              ElevatedButton(style: ButtonStyle(backgroundColor: MaterialStatePropertyAll(Colors.white)), onPressed: () {
+
+                setState(() {
+                  newsProvider.increment();
+                });
+
+                print("nnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn ${newsProvider.pageNo}");
+              }, child: Text("Next",style: TextStyle(fontSize: 25,fontWeight: FontWeight.w700,color: Colors.blueGrey)),)],),),
           SizedBox(width: 10,),
           Expanded(flex: 3,child:Container(child: Center(child: Text("option",style: TextStyle(fontSize:18,color: Colors.blue),))) ),
         ],),
