@@ -12,6 +12,8 @@ class HomeSortedPage extends StatefulWidget {
 
 class _HomeSortedPageState extends State<HomeSortedPage> {
 
+  String sortBy="relevancy";
+
   @override
   Widget build(BuildContext context) {
 
@@ -25,11 +27,6 @@ class _HomeSortedPageState extends State<HomeSortedPage> {
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
               ElevatedButton(style: ButtonStyle(backgroundColor: MaterialStatePropertyAll(Colors.white)), onPressed: () {
-                // if(pageNo>1){
-                //   return null;
-                // }else{
-                //   pageNo-=1;
-                // }
                 setState(() {
                   newsProvider.decrement();
                 });
@@ -40,11 +37,18 @@ class _HomeSortedPageState extends State<HomeSortedPage> {
                 setState(() {
                   newsProvider.increment();
                 });
-
                 print("nnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn ${newsProvider.pageNo}");
               }, child: Text("Next",style: TextStyle(fontSize: 25,fontWeight: FontWeight.w700,color: Colors.blueGrey)),)],),),
           SizedBox(width: 10,),
-          Expanded(flex: 3,child:Container(child: Center(child: Text("option",style: TextStyle(fontSize:18,color: Colors.blue),))) ),
+          Expanded(flex: 3,child:DropdownButton(
+            value: sortBy,
+            items: [
+              DropdownMenuItem(child:Text("relevancy",style: TextStyle(color: Colors.teal),),value:"relevancy", ),
+              DropdownMenuItem(child:Text("popularity",style: TextStyle(color: Colors.teal)),value:"popularity", ),
+              DropdownMenuItem(child:Text("publishedAt",style: TextStyle(color: Colors.teal)),value:"publishedAt", ),
+            ], onChanged: (value) => setState(() {
+              sortBy=value!;
+            }),) ),
         ],),
     );
   }

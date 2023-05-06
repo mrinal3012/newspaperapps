@@ -1,8 +1,6 @@
 class NewsTopicName{
   String ? name;
-  int ? id;
-  NewsTopicName({this.name,this.id});
-
+  NewsTopicName({this.name});
 
 }
 List<NewsTopicName> newslist=[

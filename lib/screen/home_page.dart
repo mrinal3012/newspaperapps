@@ -17,7 +17,7 @@ class HomePage extends StatefulWidget {
   State<HomePage> createState() => _HomePageState();
 }
 class _HomePageState extends State<HomePage> {
-
+  List newsName=[];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -41,7 +41,7 @@ class _HomePageState extends State<HomePage> {
         color: Colors.white,
         child: Column(
           children: [
-            Expanded(flex: 1, child: HomeNewsHeader()),
+            Expanded(flex: 2, child: HomeNewsHeader()),
             Expanded(flex: 1, child:HomeSortedPage()),
             Expanded(flex: 11, child: HomeNewsListPage())
           ],

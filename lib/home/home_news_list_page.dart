@@ -8,7 +8,9 @@ import 'package:newspaperapps/porvider/news_provider.dart';
 import 'package:provider/provider.dart';
 
 class HomeNewsListPage extends StatefulWidget {
-  const HomeNewsListPage({Key? key}) : super(key: key);
+  // const HomeNewsListPage({Key? key}) : super(key: key);
+
+
 
   @override
   State<HomeNewsListPage> createState() => _HomeNewsListPageState();
@@ -16,12 +18,11 @@ class HomeNewsListPage extends StatefulWidget {
 
 class _HomeNewsListPageState extends State<HomeNewsListPage> {
 
-
+  String  name="mrinal";
 
   @override
   Widget build(BuildContext context) {
     var newsProvider=Provider.of<NewsProvider>(context);
-    // var pageNo = newsProvider.pageNo;
     return Scaffold(
       body: FutureBuilder<NewsModel>(
         future: newsProvider.GetHomeData(),
@@ -53,9 +54,6 @@ class _HomeNewsListPageState extends State<HomeNewsListPage> {
                     ),
                   )
 
-
-                  // Image.network("${snapshot.data!.articles![index].urlToImage}",
-                  //   width: double.infinity,height: double.infinity,fit: BoxFit.cover,),
                 ) ),
                 SizedBox(width: 10,),
                 Expanded(flex: 3, child:Text("${snapshot.data!.articles![index].title}") ),
