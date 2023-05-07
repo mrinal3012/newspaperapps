@@ -41,9 +41,9 @@ class _HomePageState extends State<HomePage> {
         color: Colors.white,
         child: Column(
           children: [
-            Expanded(flex: 2, child: HomeNewsHeader()),
-            Expanded(flex: 1, child:HomeSortedPage()),
-            Expanded(flex: 11, child: HomeNewsListPage())
+            Expanded(flex: 3, child: HomeNewsHeader()),
+            Expanded(flex: 2, child:HomeSortedPage()),
+            Expanded(flex: 22, child: HomeNewsListPage())
           ],
         ),
       ),

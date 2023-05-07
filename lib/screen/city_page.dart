@@ -1,5 +1,8 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:newspaperapps/http/custom_http_page.dart';
 import 'package:newspaperapps/model/model_class_page.dart';
+import 'package:newspaperapps/search/Search_details_page.dart';
 
 class CityPage extends StatefulWidget {
   const CityPage({Key? key}) : super(key: key);
@@ -10,112 +13,181 @@ class CityPage extends StatefulWidget {
 
 class _CityPageState extends State<CityPage> {
   TextEditingController _cityController = TextEditingController();
+  NewsModel? newsModel;
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        resizeToAvoidBottomInset: false,
-        backgroundColor: Colors.white,
-        body: Padding(
-          padding: const EdgeInsets.only(top: 40, left: 10, right: 10),
-          child: Column(
-            children: [
-              Expanded(
-                  flex: 10,
-                  child: Padding(
-                    padding: const EdgeInsets.only(bottom: 8),
-                    child: TextField(
-                      controller: _cityController,
-                      decoration: InputDecoration(
-                          hintText: "Search City",
-                          border: OutlineInputBorder(
-                              borderSide: BorderSide(width: 20),
-                              borderRadius: BorderRadius.circular(10)),
-                          suffixIcon: Icon(Icons.search)),
-                    ),
-                  )),
-              SizedBox(
-                height: 5,
-              ),
-              Expanded(
-                  flex: 1,
-                  child: Container(
-                    color: Colors.blueGrey,
-                  )),
-              SizedBox(
-                height: 5,
-              ),
-              Expanded(
-                  flex: 40,
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Expanded(
-                        flex: 3,
-                        child: Text(
-                          "POPULAR CITYS",
-                          style: TextStyle(
-                              fontSize: 15,
-                              fontWeight: FontWeight.w900,
-                              color: Colors.red),
-                        ),
-                      ),
-                      Expanded(
-                          flex: 32,
-                          child: GridView.builder(
-                              gridDelegate:
-                                  SliverGridDelegateWithFixedCrossAxisCount(
-                                      crossAxisCount: 4,
-                                      mainAxisSpacing: 5,
-                                      childAspectRatio: 1,
-                                      crossAxisSpacing: 5),
-                              itemCount: 8,
-                              itemBuilder: (context, index) => Column(
-                                    children: [
-                                      CircleAvatar(
-                                        backgroundImage: AssetImage(
-                                            "${citylist[index].img}"),
-                                      ),
-                                      Text(
-                                        "${citylist[index].name}",
-                                        style: TextStyle(
-                                            fontSize: 12,
-                                            color: Colors.black,
-                                            fontWeight: FontWeight.w600),
-                                      )
-                                    ],
-                                  )))
-                    ],
-                  )),
-              Expanded(
-                  flex: 1,
-                  child: Container(
-                    color: Colors.blueGrey,
-                  )),
-              SizedBox(height: 10,),
-              Expanded(
-                flex: 60,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Expanded(flex: 3, child: Text("ALL CITIES",style: TextStyle(color: Colors.red,fontWeight: FontWeight.w800),)),
-                    Expanded(
-                      flex: 50,
-                      child: ListView.builder(
-                        itemCount: 10,
-                        itemBuilder: (context, index) => Container(
-                          padding: EdgeInsets.only(left: 10),
-                          height: 40,child: Text("${cityname[index]}",style: TextStyle(color: Colors.black,fontWeight: FontWeight.w600)) ,),)
-                    ),
-                  ],
+    return SafeArea(
+      child: Scaffold(
+          resizeToAvoidBottomInset: false,
+          backgroundColor: Colors.white,
+          body: Padding(
+            padding: const EdgeInsets.only(top: 10, left: 10, right: 10),
+            child: Column(
+              children: [
+                Expanded(
+                    flex: 15,
+                    child: Padding(
+                        padding: const EdgeInsets.only(bottom: 8),
+                        child: TextField(
+                          controller: _cityController,
+                          onEditingComplete: () async {
+                            newsModel = await CustomHttpRequest.fatchSerechDate(
+                                _cityController.text.toString());
+                            setState(() {});
+                          },
+                          decoration: InputDecoration(
+                              enabledBorder: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(12),
+                                  borderSide: BorderSide(
+                                      width: 2, color: Colors.blueGrey)),
+                              focusedBorder: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(12),
+                                  borderSide:
+                                      BorderSide(width: 2, color: Colors.teal)),
+                              // border: OutlineInputBorder(borderRadius: BorderRadius.circular(12),borderSide: BorderSide(width: 5,color: Colors.red)),
+                              prefixIcon: Icon(Icons.search),
+                              suffixIcon: IconButton(
+                                  onPressed: () {
+                                    _cityController.clear();
+                                    setState(() {});
+                                  },
+                                  icon: Icon(Icons.clear_outlined))),
+                        ))),
+                SizedBox(
+                  height: 5,
                 ),
-              ),
-            ],
-          ),
-        ));
-  }
+                Expanded(
+                    flex: 45,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Expanded(
+                          flex: 2,
+                          child: Text(
+                            "POPULAR CITYS",
+                            style: TextStyle(
+                                fontSize: 12,
+                                fontWeight: FontWeight.w900,
+                                color: Colors.red),
+                          ),
+                        ),
+                        Expanded(
+                            flex: 32,
+                            child: GridView.builder(
+                                physics: NeverScrollableScrollPhysics(),
+                                gridDelegate:
+                                    SliverGridDelegateWithFixedCrossAxisCount(
+                                        crossAxisCount: 4,
+                                        mainAxisSpacing: 1,
+                                        childAspectRatio: 1,
+                                        crossAxisSpacing: 1),
+                                itemCount: citylist.length,
+                                itemBuilder: (context, index) =>
+                                    GestureDetector(
+                                      onTap: () async {
+                                        // _cityController.text=citylist[index].name;
+                                        newsModel = await CustomHttpRequest
+                                            .fatchSerechDate(
+                                                citylist[index].name);
+                                        setState(() {});
+                                      },
+                                      child: Column(
+                                        children: [
+                                          Container(
+                                              width: 50,
+                                              height: 50,
+                                              decoration: BoxDecoration(
+                                                  image: DecorationImage(
+                                                      image: AssetImage(
+                                                          "${citylist[index].img}")),
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          15))),
 
-  List<String> cityname=[
-    "bagerhat","chuadanga","jashore","jhenaidah","khulna","kushtia","magura","meherpur","narail","satkhira",
-  ];
+
+                                          Text(
+                                            "${citylist[index].name}",
+                                            style: TextStyle(
+                                                fontSize: 12,
+                                                color: Colors.black,
+                                                fontWeight: FontWeight.w600),
+                                          )
+                                        ],
+                                      ),
+                                    )))
+                      ],
+                    )),
+                Expanded(
+                    flex: 1,
+                    child: Container(
+                      color: Colors.blueGrey,
+                    )),
+                SizedBox(
+                  height: 10,
+                ),
+                Expanded(
+                  flex: 100,
+                  child: Container(
+                    height: double.infinity,
+                    width: double.infinity,
+                    child: newsModel?.articles == null
+                        ? SizedBox(
+                            height: 0,
+                          )
+                        : ListView.builder(
+                            itemCount: newsModel!.articles!.length,
+                            itemBuilder: (context, index) => Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: InkWell(
+                                onTap: () {
+                                  Navigator.of(context).push(MaterialPageRoute(builder: (context) =>
+                                      SearchDetailsPage(articles:newsModel!.articles![index]),));
+                                },
+                                child: Container(
+                                  height: 150,
+                                  color: Colors.blue.withOpacity(.1),
+                                  width: double.infinity,
+                                  child: Row(
+                                    children: [
+                                      Expanded(
+                                          flex: 2,
+                                          child: Padding(
+                                              padding: const EdgeInsets.symmetric(
+                                                  vertical: 15, horizontal: 3),
+                                              child: ClipRRect(
+                                                borderRadius:
+                                                    BorderRadius.circular(12),
+                                                child: CachedNetworkImage(
+                                                  imageUrl:
+                                                      "${newsModel!.articles![index].urlToImage}",
+                                                  placeholder: (context, url) =>
+                                                      Center(
+                                                          child:
+                                                              CircularProgressIndicator()),
+                                                  errorWidget: (context, url,
+                                                          error) =>
+                                                      Image.asset(
+                                                          "images/noimage.jpg"),
+                                                ),
+                                              ))),
+                                      SizedBox(
+                                        width: 10,
+                                      ),
+                                      Expanded(
+                                          flex: 3,
+                                          child: Text("${newsModel!.articles![index].title}")),
+                                    ],
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
+                  ),
+                ),
+              ],
+            ),
+          )),
+    );
+  }
 }
