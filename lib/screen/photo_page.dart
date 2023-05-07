@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:newspaperapps/http/custom_http_page.dart';
 import 'package:newspaperapps/model/model_class_page.dart';
+import 'package:newspaperapps/photo/photo_details_page.dart';
 
 class PhotoPage extends StatefulWidget {
   const PhotoPage({Key? key}) : super(key: key);
@@ -64,7 +65,7 @@ class _PhotoPageState extends State<PhotoPage> {
                       physics: NeverScrollableScrollPhysics(),
                       itemCount: 1,
                       itemBuilder: (context, index) => Container(
-                        child: Image.network(fit: BoxFit.cover, "${picterModel!.hits![index].largeImageURL}"),
+                        child: Image.network(fit: BoxFit.cover,"${picterModel!.hits![index].largeImageURL}"),
                       ),
                     )),
           SizedBox(
@@ -83,8 +84,13 @@ class _PhotoPageState extends State<PhotoPage> {
                       itemCount: 10,
                       itemBuilder: (context, index) => Padding(
                         padding: const EdgeInsets.all(8.0),
-                        child: Container(
-                           child: Image.network(fit: BoxFit.cover, "${picterModel!.hits![index+1].largeImageURL}"),
+                        child: InkWell(
+                          onTap: () {
+                            Navigator.of(context).push(MaterialPageRoute(builder: (context) => PhotoDetailsPage(hits: picterModel!.hits![index+1])));
+                          },
+                          child: Container(
+                             child: Image.network(fit: BoxFit.cover,"${picterModel!.hits![index+1].largeImageURL}"),
+                          ),
                         ),
                       ),
                     ),
