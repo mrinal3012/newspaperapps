@@ -50,8 +50,7 @@ class _CityPageState extends State<CityPage> {
                                   borderRadius: BorderRadius.circular(12),
                                   borderSide:
                                       BorderSide(width: 2, color: Colors.teal)),
-                              // border: OutlineInputBorder(borderRadius: BorderRadius.circular(12),borderSide: BorderSide(width: 5,color: Colors.red)),
-                              prefixIcon: Icon(Icons.search),
+                               prefixIcon: Icon(Icons.search),
                               suffixIcon: IconButton(
                                   onPressed: () {
                                     _cityController.clear();

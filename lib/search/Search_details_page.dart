@@ -14,7 +14,7 @@ class SearchDetailsPage extends StatelessWidget {
     var newsProvider=Provider.of<NewsProvider>(context);
     return Scaffold(
       backgroundColor: newsProvider.gr,
-      appBar: AppBar(backgroundColor: newsProvider.gr,),
+      appBar: AppBar(backgroundColor: Color(0xff001429),),
       body: Padding(
         padding: const EdgeInsets.only(left: 20,right: 20),
         child: ListView(

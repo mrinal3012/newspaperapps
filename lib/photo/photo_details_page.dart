@@ -14,15 +14,13 @@ class PhotoDetailsPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
-        backgroundColor: newsProvider.gr,
+        backgroundColor: Color(0xff001429),
       ),
       body: Container(
         child: Column(children: [
           Expanded(child: Container(
-
             child: Image.network("${hits!.largeImageURL}",fit: BoxFit.cover),
-            // decoration: BoxDecoration(image: DecorationImage(fit: BoxFit.cover,image: AssetImage("${hits!.largeImageURL}"))),
-          ),)
+            ),)
         ],),
          ),
     );

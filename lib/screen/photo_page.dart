@@ -14,6 +14,8 @@ class PhotoPage extends StatefulWidget {
 }
 
 class _PhotoPageState extends State<PhotoPage> {
+
+  TextEditingController _photoController=TextEditingController();
   PicterModel ? picterModel;
   String model="flowers";
   @override
@@ -37,10 +39,38 @@ class _PhotoPageState extends State<PhotoPage> {
         width: double.infinity,
         height: double.infinity,
         child: Column(children: [
+          SizedBox(height: 50,),
+
+          Expanded(flex: 2, child: Padding(
+              padding: const EdgeInsets.only(top: 10),
+              child: TextField(
+                controller: _photoController,
+                onEditingComplete: () async {
+                  picterModel = await CustomHttpRequest.fatchPhotoDate(_photoController.text.toString());
+                  setState(() {});
+                },
+                decoration: InputDecoration(
+                    enabledBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(12),
+                        borderSide: BorderSide(
+                            width: 2, color: Colors.blueGrey)),
+                    focusedBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(12),
+                        borderSide:
+                        BorderSide(width: 2, color: Colors.teal)),
+                    prefixIcon: Icon(Icons.search),
+                    suffixIcon: IconButton(
+                        onPressed: () {
+                          _photoController.clear();
+                          setState(() {});
+                        },
+                        icon: Icon(Icons.clear_outlined))),
+              ))),
           Expanded(
-              flex: 3,
+              flex: 2,
               child: Container(
                   child: MasonryGridView.count(
+                    physics: NeverScrollableScrollPhysics(),
                 shrinkWrap: true,
                 crossAxisCount: 4,
                 mainAxisSpacing: 14,
@@ -66,9 +96,6 @@ class _PhotoPageState extends State<PhotoPage> {
                   );
                 },
               ))),
-          SizedBox(
-            height: 10,
-          ),
           Expanded(
               flex: 10,
               child: picterModel?.hits == null
@@ -101,7 +128,7 @@ class _PhotoPageState extends State<PhotoPage> {
                   : ListView.builder(
                       shrinkWrap: true,
                       scrollDirection: Axis.horizontal,
-                      itemCount: 10,
+                      itemCount:picterModel!.hits!.length,
                       itemBuilder: (context, index) => Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: InkWell(
@@ -124,11 +151,7 @@ class _PhotoPageState extends State<PhotoPage> {
   List<String> photoName = [
     "model",
     "flowers",
-    "nature",
     "river",
-    "forest",
-    "wild",
-    "Iceland",
     "animal",
   ];
 }
