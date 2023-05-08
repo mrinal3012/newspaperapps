@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:newspaperapps/home/home_news_list_page.dart';
 import 'package:newspaperapps/http/custom_http_page.dart';
 import 'package:newspaperapps/model/model_class_page.dart';
+import 'package:newspaperapps/porvider/news_provider.dart';
+import 'package:provider/provider.dart';
 
 class HomeNewsHeader extends StatefulWidget {
   const HomeNewsHeader({Key? key}) : super(key: key);
@@ -15,9 +17,10 @@ class _HomeNewsPageState extends State<HomeNewsHeader> {
   NewsModel? newsModel;
   @override
   Widget build(BuildContext context) {
+    var newsProvider=Provider.of<NewsProvider>(context);
     return Scaffold(
+      backgroundColor: newsProvider.gr,
       body: Container(
-        color: Colors.white,
         width: double.infinity,
         child: ListView.builder(
             shrinkWrap: true,
@@ -26,12 +29,11 @@ class _HomeNewsPageState extends State<HomeNewsHeader> {
             itemBuilder: (context, index) => Padding(
               padding: const EdgeInsets.only(left: 15,right: 15,top: 20),
               child: Container(
-                child: TextButton(onPressed: (){
+                child: TextButton(onPressed: ()async{
+                  // newsModel= await CustomHttpRequest.fatchHomeData(newslist[index]);
                   // newsModel=await CustomHttpRequest.fatchHomeData();
                   // setState(() {
-                  //
                   // });
-
                   // name="${newslist[index].name}";
                   // newsName="${newslist[index].name}";
                   // newsName.add(newslist[index].name);

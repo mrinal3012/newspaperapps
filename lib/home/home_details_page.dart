@@ -1,6 +1,8 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:newspaperapps/model/model_class_page.dart';
+import 'package:newspaperapps/porvider/news_provider.dart';
+import 'package:provider/provider.dart';
 
 class HomePageDetails extends StatelessWidget {
   // const HomePageDetails({Key? key}) : super(key: key);
@@ -8,16 +10,17 @@ class HomePageDetails extends StatelessWidget {
   HomePageDetails({required this.articles});
   @override
   Widget build(BuildContext context) {
+    var newsProvider=Provider.of<NewsProvider>(context);
     return Scaffold(
-      backgroundColor: Color(0xff1B192F),
-      appBar: AppBar(backgroundColor: Color(0xff1B192F),),
+      backgroundColor: newsProvider.gr,
+      appBar: AppBar(backgroundColor: newsProvider.gr,),
         body:  Padding(
     padding: const EdgeInsets.only(left: 20, right: 20),
     child: ListView(
     children: [
     Text("${articles!.title}",
     style: TextStyle(
-    fontSize: 35, color: Colors.white, fontWeight: FontWeight.w700),
+    fontSize: 35,color: newsProvider.gr==Color(0xff2A2A36)?Colors.white:Colors.black, fontWeight: FontWeight.w700),
     ),
     SizedBox(
     height: 20,
@@ -27,11 +30,11 @@ class HomePageDetails extends StatelessWidget {
     children: [
     Text(
     "${articles!.publishedAt}",
-    style: TextStyle(fontSize: 16, color: Colors.white),
+    style: TextStyle(fontSize: 16, color: newsProvider.gr==Color(0xff2A2A36)?Colors.white:Colors.black),
     ),
     Text(
     "less them a minute",
-    style: TextStyle(fontSize: 16, color: Colors.white),
+    style: TextStyle(fontSize: 16, color: newsProvider.gr==Color(0xff2A2A36)?Colors.white:Colors.black),
     ),
     ],
     ),
@@ -56,23 +59,23 @@ class HomePageDetails extends StatelessWidget {
     height: 20,
     ),
     Text("Description",
-    style: TextStyle(fontSize: 26, color: Colors.white,fontWeight: FontWeight.w600)),
+    style: TextStyle(fontSize: 26, color: newsProvider.gr==Color(0xff2A2A36)?Colors.white:Colors.black,fontWeight: FontWeight.w600)),
     SizedBox(
     height: 20,
     ),
     Text(
     "${articles!.description}",
-    style: TextStyle(fontSize: 22, color: Colors.white)),
+    style: TextStyle(fontSize: 22, color: newsProvider.gr==Color(0xff2A2A36)?Colors.white:Colors.black)),
     SizedBox(
     height: 20,
     ),
-    Text("Contruct", style: TextStyle(fontSize: 26, color: Colors.white,fontWeight: FontWeight.w600)),
+    Text("Contruct", style: TextStyle(fontSize: 26, color: newsProvider.gr==Color(0xff2A2A36)?Colors.white:Colors.black,fontWeight: FontWeight.w600)),
     SizedBox(
     height: 20,
     ),
     Text(
     "${articles!.content}",
-    style: TextStyle(fontSize: 22, color: Colors.white)),
+    style: TextStyle(fontSize: 22, color: newsProvider.gr==Color(0xff2A2A36)?Colors.white:Colors.black)),
     ],
     ),
     ),

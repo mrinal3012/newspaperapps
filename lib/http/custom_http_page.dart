@@ -10,10 +10,10 @@ import 'package:newspaperapps/screen/photo_page.dart';
 
 class CustomHttpRequest{
 
- static Future<NewsModel> fatchHomeData(pageNo)async{
+ static Future<NewsModel> fatchHomeData(pageNo,topic)async{
 
     NewsModel ? newsModel;
-    String url="https://newsapi.org/v2/everything?q=bangladesh&pageSize=10&page=${pageNo}&apiKey=ccdb5fd8b4744dacb1416e93f8c8cf7d";
+    String url="https://newsapi.org/v2/everything?q=${topic}&pageSize=10&page=${pageNo}&apiKey=ccdb5fd8b4744dacb1416e93f8c8cf7d";
     var urldata = await http.get(Uri.parse(url));
     var data=jsonDecode(urldata.body);
     newsModel=NewsModel.fromJson(data);

@@ -20,36 +20,58 @@ class _HomeSortedPageState extends State<HomeSortedPage> {
     var newsProvider=Provider.of<NewsProvider>(context);
 
     return Scaffold(
-      body: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Expanded(flex: 4, child:Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: [
-              ElevatedButton(style: ButtonStyle(backgroundColor: MaterialStatePropertyAll(Colors.white)), onPressed: () {
-                setState(() {
-                  newsProvider.decrement();
-                });
+      backgroundColor: newsProvider.gr,
+      body: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 10),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Expanded(flex: 4, child:Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                ElevatedButton(style: ButtonStyle(backgroundColor: MaterialStatePropertyAll(Colors.white)), onPressed: () {
+                  setState(() {
+                    newsProvider.decrement();
+                  });
 
-              }, child: Text("Prev",style: TextStyle(fontSize: 25,fontWeight: FontWeight.w700,color: Colors.blueGrey)),),
-              ElevatedButton(style: ButtonStyle(backgroundColor: MaterialStatePropertyAll(Colors.white)), onPressed: () {
+                }, child: Text("Prev",style: TextStyle(fontSize: 25,fontWeight: FontWeight.w700,color: Colors.blueGrey)),),
+                ElevatedButton(style: ButtonStyle(backgroundColor: MaterialStatePropertyAll(Colors.white)), onPressed: () {
 
+                  setState(() {
+                    newsProvider.increment();
+                  });
+                  print("nnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn ${newsProvider.pageNo}");
+                }, child: Text("Next",style: TextStyle(fontSize: 25,fontWeight: FontWeight.w700,color: Colors.blueGrey)),)],),),
+            SizedBox(width: 10,),
+            Expanded(flex: 3,child:Row(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+              IconButton(onPressed: () {
+                newsProvider.color();
                 setState(() {
-                  newsProvider.increment();
+
                 });
-                print("nnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn ${newsProvider.pageNo}");
-              }, child: Text("Next",style: TextStyle(fontSize: 25,fontWeight: FontWeight.w700,color: Colors.blueGrey)),)],),),
-          SizedBox(width: 10,),
-          Expanded(flex: 3,child:DropdownButton(
-            value: sortBy,
-            items: [
-              DropdownMenuItem(child:Text("relevancy",style: TextStyle(color: Colors.teal),),value:"relevancy", ),
-              DropdownMenuItem(child:Text("popularity",style: TextStyle(color: Colors.teal)),value:"popularity", ),
-              DropdownMenuItem(child:Text("publishedAt",style: TextStyle(color: Colors.teal)),value:"publishedAt", ),
-            ], onChanged: (value) => setState(() {
-              sortBy=value!;
-            }),) ),
-        ],),
+              }, icon: Icon(Icons.light_mode_outlined)),
+              IconButton(onPressed: () {
+                newsProvider.color1();
+                setState(() {
+                  print("cccccccccccccccccccccccccccccccccccccccccccccccccccccccc ${newsProvider.gr}");
+                });
+              }, icon: Icon(Icons.nightlight_outlined))
+            ],)
+
+            // DropdownButton(
+            //   value: sortBy,
+            //   items: [
+            //     DropdownMenuItem(child:Text("relevancy",style: TextStyle(color: Colors.teal),),value:"relevancy", ),
+            //     DropdownMenuItem(child:Text("popularity",style: TextStyle(color: Colors.teal)),value:"popularity", ),
+            //     DropdownMenuItem(child:Text("publishedAt",style: TextStyle(color: Colors.teal)),value:"publishedAt", ),
+            //   ], onChanged: (value) => setState(() {
+            //     sortBy=value!;
+            //   }),)
+            ),
+          ],),
+      ),
     );
   }
 }

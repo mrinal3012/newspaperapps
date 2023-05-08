@@ -3,6 +3,8 @@ import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:newspaperapps/http/custom_http_page.dart';
 import 'package:newspaperapps/model/model_class_page.dart';
 import 'package:newspaperapps/photo/photo_details_page.dart';
+import 'package:newspaperapps/porvider/news_provider.dart';
+import 'package:provider/provider.dart';
 
 class PhotoPage extends StatefulWidget {
   const PhotoPage({Key? key}) : super(key: key);
@@ -13,10 +15,22 @@ class PhotoPage extends StatefulWidget {
 
 class _PhotoPageState extends State<PhotoPage> {
   PicterModel ? picterModel;
+  String model="flowers";
+  @override
+  void initState() {
+    model;
+    setState(() {
+
+    });
+    // TODO: implement initState
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
+    var newsProvider=Provider.of<NewsProvider>(context);
     return Scaffold(
+      backgroundColor: newsProvider.gr,
         body: Padding(
       padding: const EdgeInsets.symmetric(horizontal: 10),
       child: Container(
@@ -35,7 +49,8 @@ class _PhotoPageState extends State<PhotoPage> {
                 itemBuilder: (context, index) {
                   return InkWell(
                     onTap: () async {
-                      picterModel= await CustomHttpRequest.fatchPhotoDate(photoName[index]);
+                      model=photoName[index];
+                      picterModel= await CustomHttpRequest.fatchPhotoDate(model);
                       setState(() {});
                     },
                     child: Container(
@@ -45,7 +60,7 @@ class _PhotoPageState extends State<PhotoPage> {
                       child: Center(
                           child: Text(
                         "${photoName[index]}",
-                        style: TextStyle(fontSize: 15),
+                        style: TextStyle(fontSize: 15,color: newsProvider.gr==Color(0xff2A2A36)?Colors.white:Colors.black),
                       )),
                     ),
                   );
@@ -64,8 +79,13 @@ class _PhotoPageState extends State<PhotoPage> {
                       shrinkWrap: true,
                       physics: NeverScrollableScrollPhysics(),
                       itemCount: 1,
-                      itemBuilder: (context, index) => Container(
-                        child: Image.network(fit: BoxFit.cover,"${picterModel!.hits![index].largeImageURL}"),
+                      itemBuilder: (context, index) => InkWell(
+                        onTap: () {
+                          Navigator.of(context).push(MaterialPageRoute(builder: (context) => PhotoDetailsPage(hits: picterModel!.hits![index])));
+                        },
+                        child: Container(
+                          child: Image.network(fit: BoxFit.cover,"${picterModel!.hits![index].largeImageURL}"),
+                        ),
                       ),
                     )),
           SizedBox(
@@ -102,12 +122,12 @@ class _PhotoPageState extends State<PhotoPage> {
   }
 
   List<String> photoName = [
-    "Model",
-    "Actor",
+    "model",
+    "flowers",
     "nature",
     "river",
-    "morning",
-    "night",
+    "forest",
+    "wild",
     "Iceland",
     "animal",
   ];

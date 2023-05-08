@@ -12,10 +12,19 @@ class NewsProvider extends ChangeNotifier {
   int pageNo = 1;
   String sortby="relevancy";
 
+  Color? gr;
+
+  void color(){
+    gr=Colors.white;
+  }
+  void color1(){
+    gr=Color(0xff2A2A36);
+  }
 
 
-  Future<NewsModel> GetHomeData() async {
-    newsModel = await CustomHttpRequest.fatchHomeData(pageNo);
+
+  Future<NewsModel> GetHomeData(int pageNo,String topic) async {
+    newsModel = await CustomHttpRequest.fatchHomeData(pageNo,topic);
     return newsModel!;
   }
   void increment(){

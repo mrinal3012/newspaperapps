@@ -2,7 +2,9 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:newspaperapps/http/custom_http_page.dart';
 import 'package:newspaperapps/model/model_class_page.dart';
+import 'package:newspaperapps/porvider/news_provider.dart';
 import 'package:newspaperapps/search/Search_details_page.dart';
+import 'package:provider/provider.dart';
 
 class CityPage extends StatefulWidget {
   const CityPage({Key? key}) : super(key: key);
@@ -15,12 +17,15 @@ class _CityPageState extends State<CityPage> {
   TextEditingController _cityController = TextEditingController();
   NewsModel? newsModel;
 
+  String model="model";
+
   @override
   Widget build(BuildContext context) {
+    var newsProvider=Provider.of<NewsProvider>(context);
     return SafeArea(
       child: Scaffold(
           resizeToAvoidBottomInset: false,
-          backgroundColor: Colors.white,
+          backgroundColor: newsProvider.gr,
           body: Padding(
             padding: const EdgeInsets.only(top: 10, left: 10, right: 10),
             child: Column(
@@ -87,9 +92,8 @@ class _CityPageState extends State<CityPage> {
                                     GestureDetector(
                                       onTap: () async {
                                         // _cityController.text=citylist[index].name;
-                                        newsModel = await CustomHttpRequest
-                                            .fatchSerechDate(
-                                                citylist[index].name);
+
+                                        newsModel = await CustomHttpRequest.fatchSerechDate(citylist[index].name);
                                         setState(() {});
                                       },
                                       child: Column(
@@ -110,7 +114,7 @@ class _CityPageState extends State<CityPage> {
                                             "${citylist[index].name}",
                                             style: TextStyle(
                                                 fontSize: 12,
-                                                color: Colors.black,
+                                                color: newsProvider.gr==Color(0xff2A2A36)?Colors.white:Colors.black,
                                                 fontWeight: FontWeight.w600),
                                           )
                                         ],
@@ -176,7 +180,7 @@ class _CityPageState extends State<CityPage> {
                                       ),
                                       Expanded(
                                           flex: 3,
-                                          child: Text("${newsModel!.articles![index].title}")),
+                                          child: Text("${newsModel!.articles![index].title}",style: TextStyle(color: newsProvider.gr==Color(0xff2A2A36)?Colors.white:Colors.black),)),
                                     ],
                                   ),
                                 ),

@@ -30,7 +30,7 @@ class _ScreenPageState extends State<ScreenPage> {
 
       bottomNavigationBar: BottomNavigationBar(
 
-          backgroundColor: Colors.cyan,
+          backgroundColor: Colors.blue,
           unselectedItemColor: Colors.blueGrey,
           selectedItemColor: Colors.black,
           currentIndex: _currentIndex,
