@@ -31,7 +31,7 @@ class CustomHttpRequest{
 
   static Future<PicterModel>fatchPhotoDate(photo)async{
     PicterModel ? picterModel;
-   String url="https://pixabay.com/api/?key=36136910-1bd0485a961dbb4fc3a494842&q=${photo}&pageSize=30&image_type=photo";
+   String url="https://pixabay.com/api/?key=36136910-1bd0485a961dbb4fc3a494842&q=${photo}&pageSize=20&image_type=photo";
    var urldata= await http.get(Uri.parse(url));
    var data=jsonDecode(urldata.body);
     picterModel=PicterModel.fromJson(data);

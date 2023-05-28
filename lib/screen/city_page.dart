@@ -166,12 +166,8 @@ class _CityPageState extends State<CityPage> {
                                                       "${newsModel!.articles![index].urlToImage}",
                                                   placeholder: (context, url) =>
                                                       Center(
-                                                          child:
-                                                              CircularProgressIndicator()),
-                                                  errorWidget: (context, url,
-                                                          error) =>
-                                                      Image.asset(
-                                                          "images/noimage.jpg"),
+                                                          child: CircularProgressIndicator()), errorWidget: (context, url, error) =>
+                                                      Image.asset("images/noimage.jpg"),
                                                 ),
                                               ))),
                                       SizedBox(

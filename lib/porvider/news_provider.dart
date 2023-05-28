@@ -9,6 +9,7 @@ import 'package:flutter/material.dart';
 
 class NewsProvider extends ChangeNotifier {
   NewsModel? newsModel;
+  PicterModel ? picterModel;
   int pageNo = 1;
   String sortby="relevancy";
 
@@ -27,6 +28,13 @@ class NewsProvider extends ChangeNotifier {
     newsModel = await CustomHttpRequest.fatchHomeData(pageNo,topic);
     return newsModel!;
   }
+
+  Future<PicterModel> GetPhotoData(String photo)async{
+    picterModel = await CustomHttpRequest.fatchPhotoDate(photo);
+    return picterModel!;
+  }
+
+
   void increment(){
     pageNo++;
     notifyListeners();
