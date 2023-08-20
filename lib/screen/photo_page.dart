@@ -80,7 +80,8 @@ class _PhotoPageState extends State<PhotoPage> {
                             } else if (snapshot.data == null) {
                               return Text("value is null");
                             }
-                            return       MasonryGridView.count(
+                            return
+                              MasonryGridView.count(
                               physics: NeverScrollableScrollPhysics(),
                               shrinkWrap: true,
                               crossAxisCount: 4,
