@@ -30,8 +30,9 @@ class _ScreenPageState extends State<ScreenPage> {
     return Scaffold(
 
       body:Center(child: currentScreen),
-      floatingActionButton: FloatingActionButton(backgroundColor: Color(0xff2A2A36),
-        child: Icon(Icons.add),
+      floatingActionButton: FloatingActionButton(backgroundColor: Color(0xffAF0972),
+        child: Container( decoration: BoxDecoration(borderRadius: BorderRadius.circular(30),
+        image: DecorationImage(image: AssetImage("images/news.jpg")))),
         onPressed: () {},
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
