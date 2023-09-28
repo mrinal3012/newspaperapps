@@ -14,11 +14,17 @@ class _BangladeshTimesPageState extends State<BangladeshTimesPage> {
   Widget build(BuildContext context) {
     var newsProvider=Provider.of<NewsProvider>(context);
     return Scaffold(
-      appBar: AppBar(),
+      appBar: AppBar(title: Text("Bangladesh Times"),),
       body: Container(
         height: double.infinity,
         width: double.infinity,
         color: Colors.teal,
+        child: Column(
+          children: [
+            Expanded(child: Container(height: double.infinity,width: double.infinity,color: Colors.amber,)),
+            Expanded(child: Container(height: double.infinity,width: double.infinity,color: Colors.pinkAccent,)),
+          ],
+        ),
       ),
     );
   }

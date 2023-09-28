@@ -24,7 +24,7 @@ class _CityPageState extends State<CityPage> {
     var newsProvider=Provider.of<NewsProvider>(context);
     return SafeArea(
       child: Scaffold(
-          resizeToAvoidBottomInset: false,
+
           backgroundColor: newsProvider.gr,
           body: Padding(
             padding: const EdgeInsets.only(top: 10, left: 10, right: 10),
