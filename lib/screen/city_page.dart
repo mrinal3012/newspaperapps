@@ -90,8 +90,6 @@ class _CityPageState extends State<CityPage> {
                                 itemBuilder: (context, index) =>
                                     GestureDetector(
                                       onTap: () async {
-                                        // _cityController.text=citylist[index].name;
-
                                         newsModel = await CustomHttpRequest.fatchSerechDate(citylist[index].name);
                                         setState(() {});
                                       },
